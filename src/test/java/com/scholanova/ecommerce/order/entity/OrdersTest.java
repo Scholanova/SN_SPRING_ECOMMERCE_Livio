@@ -28,9 +28,12 @@ class OrdersTest {
     public void checkout_ShouldSetTheDateAndTimeOfTodayInTheOrder() throws NotAllowedException, IllegalArgException {
         //given
         Orders order = new Orders();
+
+
         Calendar calendar = Calendar.getInstance();
         java.util.Date dateOfToday = calendar.getTime();
         java.sql.Date date = new java.sql.Date(dateOfToday.getTime());
+
         //when
         order.checkout();
         //then
@@ -51,7 +54,7 @@ class OrdersTest {
     }
 
     @Test
-    @Disabled
+    //@Disabled
     public void checkout_ShouldThrowNotAllowedExceptionIfStatusIsClosed(){
         //given
         Orders order = new Orders();
@@ -62,16 +65,11 @@ class OrdersTest {
     }
 
     @Test
-    @Disabled
-    public void checkout_ShouldThrowIllegalArgExceptionIfCartTotalItemsQuantityIsZERO(){
+    //@Disabled
+    public void checkout_ShouldThrowIllegalArgExceptionIfCartTotalItemsQuantityIsZERO() throws NotAllowedException {
         //given
         Orders order = new Orders();
-        /*
-        Cart cart = new Cart();
-        cart.setCartItems(new ArrayList<CartItem>());
-        order.setCart(cart);
-        */
-
+        order.createOrder();
         //then
         assertThrows(IllegalArgException.class, () -> order.checkout());
 

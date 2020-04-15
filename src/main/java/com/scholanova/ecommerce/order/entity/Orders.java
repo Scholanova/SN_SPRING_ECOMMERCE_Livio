@@ -50,15 +50,15 @@ public class Orders {
     }
 
     public void checkout() throws NotAllowedException, IllegalArgException {
-    /*
+
         if(this.getStatus() == OrderStatus.CLOSED){
             throw new NotAllowedException("Order closed");
         }
 
-        if(this.getCart().getCartItems().size() == 0){
+        if(this.getCart() != null && this.getCart().getCartItems().size() == 0){
             throw new IllegalArgException("No idem in cart");
         }
-    */
+
 
         Calendar calendar = Calendar.getInstance();
         java.util.Date date = calendar.getTime();
