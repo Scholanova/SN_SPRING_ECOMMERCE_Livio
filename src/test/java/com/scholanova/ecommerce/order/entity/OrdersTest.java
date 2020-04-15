@@ -112,30 +112,56 @@ class OrdersTest {
     }
 
     @Test
-    @Disabled
+    //@Disabled
     public void getDiscount_shouldReturnZEROIFCartTotalPriceIsLessThan100() throws NotAllowedException {
         //given
         Orders order = new Orders();
         order.createOrder();
+        double discount;
         //when
+        discount = order.getDiscount();
         //then
+        assertThat(discount).isEqualTo(0);
     }
 
     @Test
-    @Disabled
-    public void getDiscount_shouldReturn5percentIfCartTotalPriceIsMoreOrEqual100(){
-
+    //@Disabled
+    public void getDiscount_shouldReturn5percentIfCartTotalPriceIsMoreOrEqual100() throws NotAllowedException {
+        //given
+        Orders order = new Orders();
+        order.createOrder();
+        Product ps5 =  Product.create("ps5","sony next gen home console",500f,0f,"euro");
+        order.getCart().addProduct(ps5,2);
+        double discount;
+        //when
+        discount = order.getDiscount();
+        //then
+        assertThat(discount).isEqualTo(0.05);
     }
 
     @Test
-    @Disabled
-    public void getOrderPrice_shouldReturnTotalPriceWithDiscount(){
+    //@Disabled
+    public void getOrderPrice_shouldReturnTotalPriceWithDiscount() throws NotAllowedException {
+        //given
+        Orders order = new Orders();
+        order.createOrder();
+        Product ps5 =  Product.create("ps5","sony next gen home console",500f,0f,"euro");
+        order.getCart().addProduct(ps5,2);
+        //when
 
+        //then
+        assertThat(order.getOrderPrice()).isEqualTo(950);
     }
 
     @Test
-    @Disabled
+    //@Disabled
     public void close_ShouldSetStatusToClose(){
+        //given
+        Orders order = new Orders();
+        //when
+        order.close();
+        //then
+        assertThat(order.getStatus()).isEqualTo(OrderStatus.CLOSED);
 
     }
 

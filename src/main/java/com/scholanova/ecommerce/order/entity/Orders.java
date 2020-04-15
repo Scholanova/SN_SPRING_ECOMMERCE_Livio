@@ -8,6 +8,8 @@ import com.scholanova.ecommerce.order.exception.NotAllowedException;
 import com.sun.xml.bind.v2.TODO;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,16 +66,24 @@ public class Orders {
         this.status = OrderStatus.PENDING;
     }
 
-    public void getDiscount(){
-        //TODO
+    public double getDiscount(){
+        if(this.getCart().getTotalPrice().doubleValue()>100){
+            return 0.05;
+        }
+        else{
+            return 0;
+        }
     }
 
-    public void getOrderPrice(){
-        //TODO
+    public double getOrderPrice(){
+
+        double totalPrice = this.getCart().getTotalPrice().doubleValue();
+        double discount = totalPrice * getDiscount();
+        return totalPrice - discount;
     }
 
     public void close(){
-        //TODO
+        this.setStatus(OrderStatus.CLOSED);
     }
 
 
